@@ -18,6 +18,7 @@ public class DifficultyLevelButton : MonoBehaviour
     private ChooseLevelPage _chooseLevelPage;
     private ChooseDifficultyPage _chooseDifficultyPage;
     private AudioSource _cachedAudioSource;
+    private string _leaderBoardsTableID;
 
     #endregion
 
@@ -34,7 +35,7 @@ public class DifficultyLevelButton : MonoBehaviour
         {
             _cachedAudioSource.Play();
 
-            _chooseLevelPage.Init(_levelScriptableObjs);
+            _chooseLevelPage.Init(_levelScriptableObjs, _leaderBoardsTableID);
             _chooseLevelPage.Show();
             _chooseDifficultyPage.Invoke("Hide", _cachedAudioSource.clip.length);
         });
@@ -50,6 +51,8 @@ public class DifficultyLevelButton : MonoBehaviour
         _chooseDifficultyPage = chooseDifficultyPage;
         _titleText.text = difficultyLevel.title;
         _levelScriptableObjs = difficultyLevel._levels;
+        _leaderBoardsTableID = difficultyLevel.leaderBoardsTableID;
+
         RefreshStarsFilling();
     }
 

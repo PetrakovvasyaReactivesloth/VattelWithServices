@@ -8,6 +8,7 @@ public class LanguageWordsDictionary : ScriptableObject
     public class Difficulty
     {
         public string title;
+        public string leaderBoardsTableID;
         public List<LevelScriptableObj> _levels = new List<LevelScriptableObj>();
     }
 

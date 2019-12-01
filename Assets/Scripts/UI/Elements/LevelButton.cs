@@ -17,6 +17,7 @@ public class LevelButton : MonoBehaviour
     private LevelScriptableObj _currentLevelScriptableObj;
     private ChooseLevelPage _chooseLevelPage;
     private AudioSource _cachedAudioSource;
+    private string _leaderboardsTableID;
 
     #endregion
 
@@ -33,7 +34,7 @@ public class LevelButton : MonoBehaviour
             _cachedAudioSource.Play();
             _gameplayPage.Show();
 
-            _gameplayPage.Init(_currentLevelScriptableObj, _chooseLevelPage.GetNextLevelAfterCurrent(_currentLevelScriptableObj));
+            _gameplayPage.Init(_currentLevelScriptableObj, _leaderboardsTableID, _chooseLevelPage.GetNextLevelAfterCurrent(_currentLevelScriptableObj));
             _chooseLevelPage.Invoke("Hide", _cachedAudioSource.clip.length);
         });
     }
@@ -42,7 +43,7 @@ public class LevelButton : MonoBehaviour
 
     #region Public Methods
 
-    public void Init(LevelScriptableObj levelScriptableObj, GameplayPage gameplayPage, ChooseLevelPage chooseLevelPage)
+    public void Init(LevelScriptableObj levelScriptableObj, GameplayPage gameplayPage, ChooseLevelPage chooseLevelPage, string leaderboardsTableID)
     {
         _currentLevelScriptableObj = levelScriptableObj;
         _chooseLevelPage = chooseLevelPage;
@@ -51,6 +52,7 @@ public class LevelButton : MonoBehaviour
 
         float savedProgress = PlayerPrefsManager.GetSavedLevelStats(levelScriptableObj);
         _starsProgresBarImage.fillAmount = savedProgress;
+        _leaderboardsTableID = leaderboardsTableID;
     }
 
     #endregion

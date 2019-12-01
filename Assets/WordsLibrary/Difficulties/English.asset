@@ -15,9 +15,11 @@ MonoBehaviour:
   _title: English
   _difficultyLevels:
   - title: Easy
+    leaderBoardsTableID: CgkI7Kfxt7UJEAIQAg
     _levels:
     - {fileID: 11400000, guid: 5d255d410e7e6324a810de37658a4fc3, type: 2}
     - {fileID: 11400000, guid: 41e4df97ee99ec549bd24b6a00d3cff4, type: 2}
   - title: Medium
+    leaderBoardsTableID: CgkI7Kfxt7UJEAIQAQ
     _levels:
     - {fileID: 11400000, guid: 179aa019f889ee24d866ff73850cbb2a, type: 2}

@@ -12,12 +12,16 @@ public class ChooseLevelPage : Page
     [SerializeField] private Button _backButton;
     [SerializeField] private GameplayPage _gameplayPage;
     [SerializeField] private ChooseDifficultyPage _chooseDifficultyPage;
+    [SerializeField] private Button _leaderBoardsButton;
+    [SerializeField] private LeaderboardsManager _leaderboardsManager;
+    [SerializeField] private AuthManager _authManager;
 
     #endregion
 
     #region Private Fields
 
     private List<LevelScriptableObj> _currentLevelScriptableObjs;
+    private string _leaderBoardsTableID;
 
     #endregion
 
@@ -31,6 +35,11 @@ public class ChooseLevelPage : Page
         {
             Hide();
             _chooseDifficultyPage.Show();
+        });
+
+        _leaderBoardsButton.onClick.AddListener(() =>
+        {
+            _leaderboardsManager.ShowLeaderboard(_leaderBoardsTableID);
         });
     }
 
@@ -52,13 +61,14 @@ public class ChooseLevelPage : Page
 
     public void ShowCurrentLevelsList()
     {
-        Init(_currentLevelScriptableObjs);
+        Init(_currentLevelScriptableObjs, _leaderBoardsTableID);
     }
 
-    public void Init(List<LevelScriptableObj> levelScriptableObjs)
+    public void Init(List<LevelScriptableObj> levelScriptableObjs, string leaderboardTableID)
     {
         RemoveAllElements();
 
+        _leaderBoardsTableID = leaderboardTableID;
         _currentLevelScriptableObjs = levelScriptableObjs;
 
         foreach (var levelScriptableObj in levelScriptableObjs)
@@ -66,7 +76,16 @@ public class ChooseLevelPage : Page
             var but = Instantiate(_levelButtonPrefab, _levelButtonsParenTransform);
 
             levelScriptableObj.Parse();
-            but.Init(levelScriptableObj, _gameplayPage, this);
+            but.Init(levelScriptableObj, _gameplayPage, this, leaderboardTableID);
+        }
+
+        if (_authManager.CheckAuth())
+        {
+            _leaderBoardsButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            _leaderBoardsButton.gameObject.SetActive(false);
         }
     }
 

@@ -52,7 +52,7 @@ public class ChooseDifficultyPage : Page
             if (!_instantiatedDifficulties.ContainsKey(difficultyLevel))
             {
                 var diffLevel = Instantiate(_difficultyLevelButtonPrefab, _difficultyLevelButtonsParenTransform);
-
+                
                 diffLevel.Init(difficultyLevel, _chooseLevelPage, this);
                 _instantiatedDifficulties.Add(difficultyLevel, diffLevel);
             }

@@ -24,7 +24,8 @@
 
 public static class GPGSIds
 {
-        public const string leaderboard_testtable = "CgkI7Kfxt7UJEAIQAQ"; // <GPGSID>
+        public const string leaderboard_medium = "CgkI7Kfxt7UJEAIQAQ"; // <GPGSID>
+        public const string leaderboard_easy = "CgkI7Kfxt7UJEAIQAg"; // <GPGSID>
 
 }
 

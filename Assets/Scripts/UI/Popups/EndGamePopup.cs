@@ -22,6 +22,7 @@ public class EndGamePopup : Popup
     private const float ONE_STAR_PERCENT = 0.3f;
     private const float TWO_STAR_PERCENT = 0.6f;
     private const float THREE_STAR_PERCENT = 0.9f;
+    private const float COMPLETED_LEVEL_PERCENT = 1f;
 
     #endregion
     
@@ -35,6 +36,7 @@ public class EndGamePopup : Popup
     [SerializeField] private Color _starActiveColor, _starDeactiveColor;
     [SerializeField] private GameplayPage _gameplayPage;
     [SerializeField] private ChooseLevelPage _chooseLevelPage;
+    [SerializeField] private LeaderboardsManager _leaderboardsManager;
 
     #endregion
 
@@ -69,10 +71,14 @@ public class EndGamePopup : Popup
 
     #region Public Methods
 
-    public void Init(int currentPoints, int maximumPoints, bool nextLevelExits, LevelScriptableObj currLevelScriptableObj)
+    public void Init(int currentPoints, int maximumPoints, string leaderboardsTableID, bool nextLevelExits, LevelScriptableObj currLevelScriptableObj)
     {
         float percent = (float) currentPoints / (float) maximumPoints;
-        SaveStats(percent, currLevelScriptableObj);
+        float savedPercent = percent > COMPLETED_LEVEL_PERCENT ? COMPLETED_LEVEL_PERCENT : percent;
+
+        SaveStats(savedPercent, currLevelScriptableObj);
+
+        _leaderboardsManager.PostScores(currentPoints, leaderboardsTableID);
 
         if (percent >= ONE_STAR_PERCENT)
         {
