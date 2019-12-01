@@ -1,0 +1,81 @@
+﻿{
+  "levelName": "Easy2",
+  "levelTime": 30,
+  "levelPointsAmount": 50,
+  "words": [
+    {
+      "word": "welcome",
+      "prizeCoins": 1,
+      "tip": "приветствовать",
+      "synonyms": [
+        "greet",
+        "meet",
+        "let in",
+      ],
+      "antonyms": [
+        "Say goodbye",
+        "turn away",
+      ]
+    },
+    {
+      "word": "choose",
+      "prizeCoins": 2,
+      "tip": "выбирать",
+      "synonyms": [
+        "select",
+        "Take",
+		"Prefer",
+      ],
+      "antonyms": [
+        "disapprove",
+        "refuse",
+		"reject",
+      ]
+    },
+	{
+      "word": "begin",
+      "prizeCoins": 3,
+      "tip": "начинать",
+      "synonyms": [
+        "start",
+        "open",
+		"appear",
+      ],
+      "antonyms": [
+        "end",
+        "close",
+		"disappear",
+      ]
+    },
+	{
+      "word": "clean",
+      "prizeCoins": 1,
+      "tip": "чистить",
+      "synonyms": [
+        "clear",
+        "tidy",
+		"wash",
+      ],
+      "antonyms": [
+        "pollute",
+        "mess up",
+		"ruin",
+      ]
+    },
+	{
+      "word": "care",
+      "prizeCoins": 3,
+      "tip": "заботиться",
+      "synonyms": [
+        "worry",
+        "like",
+		"love",
+      ],
+      "antonyms": [
+        "hurt",
+        "dislike",
+		"hate",
+      ]
+    },
+  ]
+}

@@ -1,0 +1,77 @@
+﻿{
+  "levelName": "Easy1",
+  "levelTime": 30,
+  "levelPointsAmount": 25,
+  "words": [
+    {
+      "word": "check in",
+      "prizeCoins": 5,
+      "tip": "регестрировать",
+      "synonyms": [
+        "register",
+        "arrive",
+        "come",
+      ],
+      "antonyms": [
+        "check out",
+        "leave",
+      ]
+    },
+    {
+      "word": "ask",
+      "prizeCoins": 3,
+      "tip": "спрашивать",
+      "synonyms": [
+        "demand",
+        "question",
+      ],
+      "antonyms": [
+        "tell",
+        "answer",
+      ]
+    },
+	{
+      "word": "rent",
+      "prizeCoins": 4,
+      "tip": "арендовать",
+      "synonyms": [
+        "hire",
+        "borrow",
+      ],
+      "antonyms": [
+        "buy",
+        "sell",
+      ]
+    },
+	{
+      "word": "clean",
+      "prizeCoins": 1,
+      "tip": "чистить",
+      "synonyms": [
+        "clear",
+        "tidy",
+		"wash",
+      ],
+      "antonyms": [
+        "pollute",
+        "mess up",
+		"ruin",
+      ]
+    },
+	{
+      "word": "care",
+      "prizeCoins": 3,
+      "tip": "заботиться",
+      "synonyms": [
+        "worry",
+        "like",
+		"love",
+      ],
+      "antonyms": [
+        "hurt",
+        "dislike",
+		"hate",
+      ]
+    },
+  ]
+}
