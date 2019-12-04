@@ -27,7 +27,9 @@ public class MainGui : MonoBehaviour
     void Start()
     {
         // Select the Google Play Games platform as our social platform implementation
+        #if UNITY_ANDROID && !UNITY_EDITOR
         GooglePlayGames.PlayGamesPlatform.Activate();
+        #endif
     }
 
     void OnGUI()
@@ -92,7 +94,9 @@ public class MainGui : MonoBehaviour
             else {
                 // Sign out!
                 mStatusText = "Signing out.";
+                #if UNITY_ANDROID && !UNITY_EDITOR
                 ((GooglePlayGames.PlayGamesPlatform)Social.Active).SignOut();
+                #endif
             }
         }
     }

@@ -22,6 +22,8 @@ public class EndGamePopup : Popup
     private const float ONE_STAR_PERCENT = 0.3f;
     private const float TWO_STAR_PERCENT = 0.6f;
     private const float THREE_STAR_PERCENT = 0.9f;
+    private const float COMPLETED_LEVEL_PERCENT = 1f;
+    private const int ONE_HUNDERT_PERCENT = 100;
 
     #endregion
     
@@ -35,6 +37,7 @@ public class EndGamePopup : Popup
     [SerializeField] private Color _starActiveColor, _starDeactiveColor;
     [SerializeField] private GameplayPage _gameplayPage;
     [SerializeField] private ChooseLevelPage _chooseLevelPage;
+    [SerializeField] private LeaderboardsManager _leaderboardsManager;
 
     #endregion
 
@@ -69,17 +72,29 @@ public class EndGamePopup : Popup
 
     #region Public Methods
 
-    public void Init(int currentPoints, int maximumPoints, bool nextLevelExits, LevelScriptableObj currLevelScriptableObj)
+    public void Init(int currentPoints, int maximumPoints, string leaderboardsTableID, bool nextLevelExits, LevelScriptableObj currLevelScriptableObj)
     {
-        float percent = (float) currentPoints / (float) maximumPoints;
+        float percent = (float)currentPoints / (float)maximumPoints;
+        //PlayerPrefsManager.GetNormalizedPercent(percent);
+
         SaveStats(percent, currLevelScriptableObj);
+        var _levelScriptableObjs = _chooseLevelPage.CurrentLevelScriptableObjs;
+        float completedLevelProgresesPercentSum = 0;
+        foreach (var levelScriptableObj in _levelScriptableObjs)
+        {
+            var pointsPerLevel = (levelScriptableObj.LevelPointsAmount * PlayerPrefsManager.GetSavedLevelStats(levelScriptableObj));
+
+            completedLevelProgresesPercentSum +=  pointsPerLevel;
+        }
+
+        _leaderboardsManager.PostScores((int) completedLevelProgresesPercentSum, leaderboardsTableID);
 
         if (percent >= ONE_STAR_PERCENT)
         {
             _star1Image.color = _starActiveColor;
             _congradText.text = CONGRADULATIONS[Random.Range(0, CONGRADULATIONS.Length)];
         }
-        else if(percent < ONE_STAR_PERCENT)
+        else if (percent < ONE_STAR_PERCENT)
         {
             _congradText.text = LOSE_HELPERS[Random.Range(0, LOSE_HELPERS.Length)];
         }

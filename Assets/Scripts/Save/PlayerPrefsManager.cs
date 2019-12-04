@@ -11,6 +11,7 @@ public class PlayerPrefsManager : MonoBehaviour
     private const string SOUND_EFFECTS_VOLUME_KEY = "SoundEffect";
     private const string CHOOSED_BACKGROUND_SPRITE_KEY = "ChoosedBackgroundSprite";
     public const float UNSAVED_VOLUME_VALUE = -1f;
+    private const float COMPLETED_LEVEL_PERCENT = 1f;
 
     #endregion
 
@@ -52,6 +53,15 @@ public class PlayerPrefsManager : MonoBehaviour
         }
 
         return temp;
+    }
+
+     /// <summary>
+    /// Если пользователь набрал больше чем макс кол-во очков на уровне, то не должно быть прогресса больше 100%
+    /// </summary>
+    /// <param name="percent"></param>
+    public static float GetNormalizedPercent(float percent)
+    {
+        return percent > COMPLETED_LEVEL_PERCENT ? COMPLETED_LEVEL_PERCENT : percent;
     }
 
     public static float GetSavedMusicVolume()

@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class ChooseLevelPage : Page
 {
+    #region Properties
+
+    public List<LevelScriptableObj> CurrentLevelScriptableObjs { get => _currentLevelScriptableObjs; set => _currentLevelScriptableObjs = value; }
+
+    #endregion
+    
     #region Serialized Fields
 
     [SerializeField] private LevelButton _levelButtonPrefab;
@@ -12,12 +18,16 @@ public class ChooseLevelPage : Page
     [SerializeField] private Button _backButton;
     [SerializeField] private GameplayPage _gameplayPage;
     [SerializeField] private ChooseDifficultyPage _chooseDifficultyPage;
+    [SerializeField] private Button _leaderBoardsButton;
+    [SerializeField] private LeaderboardsManager _leaderboardsManager;
+    [SerializeField] private AuthManager _authManager;
 
     #endregion
 
     #region Private Fields
 
     private List<LevelScriptableObj> _currentLevelScriptableObjs;
+    private string _leaderBoardsTableID;
 
     #endregion
 
@@ -32,6 +42,11 @@ public class ChooseLevelPage : Page
             Hide();
             _chooseDifficultyPage.Show();
         });
+
+        _leaderBoardsButton.onClick.AddListener(() =>
+        {
+            _leaderboardsManager.ShowLeaderboard(_leaderBoardsTableID);
+        });
     }
 
     #endregion
@@ -41,32 +56,42 @@ public class ChooseLevelPage : Page
     public LevelScriptableObj GetNextLevelAfterCurrent(LevelScriptableObj current)
     {
         int currentIndex =
-            _currentLevelScriptableObjs.IndexOf(_currentLevelScriptableObjs.FirstOrDefault(c => c == current));
+            CurrentLevelScriptableObjs.IndexOf(CurrentLevelScriptableObjs.FirstOrDefault(c => c == current));
 
-        LevelScriptableObj temp = (currentIndex == _currentLevelScriptableObjs.Count - 1)
+        LevelScriptableObj temp = (currentIndex == CurrentLevelScriptableObjs.Count - 1)
             ? null
-            : _currentLevelScriptableObjs[currentIndex + 1];
+            : CurrentLevelScriptableObjs[currentIndex + 1];
 
         return temp;
     }
 
     public void ShowCurrentLevelsList()
     {
-        Init(_currentLevelScriptableObjs);
+        Init(CurrentLevelScriptableObjs, _leaderBoardsTableID);
     }
 
-    public void Init(List<LevelScriptableObj> levelScriptableObjs)
+    public void Init(List<LevelScriptableObj> levelScriptableObjs, string leaderboardTableID)
     {
         RemoveAllElements();
 
-        _currentLevelScriptableObjs = levelScriptableObjs;
+        _leaderBoardsTableID = leaderboardTableID;
+        CurrentLevelScriptableObjs = levelScriptableObjs;
 
         foreach (var levelScriptableObj in levelScriptableObjs)
         {
             var but = Instantiate(_levelButtonPrefab, _levelButtonsParenTransform);
 
             levelScriptableObj.Parse();
-            but.Init(levelScriptableObj, _gameplayPage, this);
+            but.Init(levelScriptableObj, _gameplayPage, this, leaderboardTableID);
+        }
+
+        if (_authManager.CheckAuth())
+        {
+            _leaderBoardsButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            _leaderBoardsButton.gameObject.SetActive(false);
         }
     }
 

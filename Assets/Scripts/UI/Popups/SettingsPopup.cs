@@ -8,6 +8,8 @@ public class SettingsPopup : Popup
     #region Constants
 
     private const string PERCENT_STRING = "%";
+    private const string SIGN_IN_STRING = "Sign in";
+    private const string SIGN_OUT_STRING = "Sign out";
 
     #endregion
 
@@ -23,6 +25,9 @@ public class SettingsPopup : Popup
     [SerializeField] private Button _resetProgressButton;
     [SerializeField] private Transform _backgroundsContentParentTransform;
     [SerializeField] private BackgroundChangerButton _backgroundChangerButtonPrefab;
+    [SerializeField] private AuthManager _authManager;
+    [SerializeField] private Button _authGooglePlayButton;
+    [SerializeField] private Text _authGooglePlayButtonText;
 
     #endregion
 
@@ -40,7 +45,20 @@ public class SettingsPopup : Popup
             PlayerPrefsManager.SaveSoundEffectsVolume(_soundEffectsVolumeSlider);
         });
 
-        
+        _authGooglePlayButton.onClick.AddListener(() =>
+        {
+            if(_authManager.CheckAuth())
+            {
+                _authManager.SignOut();
+            }
+            else
+            {
+                _authManager.SignIn();
+            }
+
+            Show();
+        });
+
         _musicVolumeSlider.onValueChanged.AddListener((value =>
         {
             SetVolumeText(_musicVolumeSliderValueText, _musicVolumeSlider);
@@ -92,6 +110,17 @@ public class SettingsPopup : Popup
     {
         float value = valueSlider.value;
         volText.text = (int) (value * 100) + PERCENT_STRING;
+    }
+
+    #endregion
+
+    #region Override Methods
+
+    public override void Show()
+    {
+        base.Show();
+
+        _authGooglePlayButtonText.text = _authManager.CheckAuth() ? SIGN_OUT_STRING : SIGN_IN_STRING;
     }
 
     #endregion

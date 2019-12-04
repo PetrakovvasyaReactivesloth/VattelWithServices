@@ -8,12 +8,12 @@ public class MainMenuPage : Page
     [SerializeField] private Button _openSettingsPageButton;
     [SerializeField] private Button _openRecordsPageButton;
     [SerializeField] private SettingsPopup _settingsPopup;
-    [SerializeField] private RecordsMenuPage _recordsMenuPage;
     [SerializeField] private Button _playButton;
     [SerializeField] private ChooseDifficultyPage _chooseDifficultyPage;
     [SerializeField] private GameObject _mainPanelGameObject;
     [SerializeField] private GameObject _loadingBundlesPanelGameObject;
-
+    [SerializeField] private LeaderboardsManager _leaderboardsManager;
+    [SerializeField] private AuthManager _authManager;
 
     #endregion
 
@@ -31,8 +31,7 @@ public class MainMenuPage : Page
 
         _openRecordsPageButton.onClick.AddListener(() =>
         {
-            _recordsMenuPage.Show();
-            Hide();
+            _leaderboardsManager.ShowAllLeaderboards();
         });
 
         _playButton.onClick.AddListener(() =>
@@ -48,6 +47,30 @@ public class MainMenuPage : Page
     {
         _loadingBundlesPanelGameObject.SetActive(false);
         _mainPanelGameObject.SetActive(true);
+        Show();
+    }
+
+    #endregion
+
+    #region Override Methods
+
+    public override void Show()
+    {
+        base.Show();
+        
+        CheckAuth();
+    }
+
+    private void CheckAuth()
+    {
+        if (_authManager.CheckAuth())
+        {
+            //_openRecordsPageButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            //_openRecordsPageButton.gameObject.SetActive(false);
+        }
     }
 
     #endregion

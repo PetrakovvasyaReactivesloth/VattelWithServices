@@ -23,11 +23,11 @@ public class GameplayPage : Page
         {
             _currentPoints = value;
 
-            if (_currentPoints >= _levelMaximumPoints)
-            {
-                _currentPoints = _levelMaximumPoints;
-                ShowEndGamePanelWithStats();
-            }
+            //if (_currentPoints >= _levelMaximumPoints)
+            //{
+            //    _currentPoints = _levelMaximumPoints;
+            //    ShowEndGamePanelWithStats();
+            //}
 
             if (_currentPoints <= 0)
             {
@@ -68,6 +68,7 @@ public class GameplayPage : Page
     private int _currentPoints;
     private int _levelMaximumPoints;
     private bool _gameEnd;
+    private string _leaderboardsTableID;
 
     #endregion
 
@@ -100,15 +101,15 @@ public class GameplayPage : Page
 
     public void RestartLevel()
     {
-        Init(_currentLevelScriptableObj);
+        Init(_currentLevelScriptableObj, _leaderboardsTableID);
     }
 
     public void StartNextLevel()
     {
-        Init(_nextLevelScriptableObj, _chooseLevelPage.GetNextLevelAfterCurrent(_nextLevelScriptableObj));
+        Init(_nextLevelScriptableObj, _leaderboardsTableID, _chooseLevelPage.GetNextLevelAfterCurrent(_nextLevelScriptableObj));
     }
 
-    public void Init(LevelScriptableObj levelScriptableObj, LevelScriptableObj nextLevelScriptableObj = null)
+    public void Init(LevelScriptableObj levelScriptableObj, string leaderboardsTableID, LevelScriptableObj nextLevelScriptableObj = null)
     {
         _nextLevelScriptableObj = null;
         _currentLevelScriptableObj = null;
@@ -121,6 +122,7 @@ public class GameplayPage : Page
         DrawLevel();
         SetLevelMaximumTime(_currentLevelScriptableObj.LevelTime);
         SetLevelMaximumPoints(_currentLevelScriptableObj.LevelPointsAmount);
+        _leaderboardsTableID = leaderboardsTableID;
     }
 
     #endregion
@@ -132,7 +134,7 @@ public class GameplayPage : Page
         _endGamePopup.Show();
         _gameEnd = true;
         _tipPopup.Hide();
-        _endGamePopup.Init(_currentPoints, _levelMaximumPoints, _nextLevelScriptableObj != null,
+        _endGamePopup.Init(_currentPoints, _levelMaximumPoints, _leaderboardsTableID, _nextLevelScriptableObj != null,
             _currentLevelScriptableObj);
         StopAllCoroutines();
         DisableAllElements();

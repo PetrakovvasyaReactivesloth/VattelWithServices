@@ -4,10 +4,17 @@ using UnityEngine.UI;
 
 public class DifficultyLevelButton : MonoBehaviour
 {
+    #region Cosntants
+
+    private const string SCORE_TEXT = "Best score: ";
+
+    #endregion
+
     #region Serialized Fields
 
     [SerializeField] private Text _titleText;
     [SerializeField] private Image _starsProgresBarImage;
+    [SerializeField] private Text _scoreText;
 
     #endregion
 
@@ -18,6 +25,7 @@ public class DifficultyLevelButton : MonoBehaviour
     private ChooseLevelPage _chooseLevelPage;
     private ChooseDifficultyPage _chooseDifficultyPage;
     private AudioSource _cachedAudioSource;
+    private string _leaderBoardsTableID;
 
     #endregion
 
@@ -34,7 +42,7 @@ public class DifficultyLevelButton : MonoBehaviour
         {
             _cachedAudioSource.Play();
 
-            _chooseLevelPage.Init(_levelScriptableObjs);
+            _chooseLevelPage.Init(_levelScriptableObjs, _leaderBoardsTableID);
             _chooseLevelPage.Show();
             _chooseDifficultyPage.Invoke("Hide", _cachedAudioSource.clip.length);
         });
@@ -50,6 +58,8 @@ public class DifficultyLevelButton : MonoBehaviour
         _chooseDifficultyPage = chooseDifficultyPage;
         _titleText.text = difficultyLevel.title;
         _levelScriptableObjs = difficultyLevel._levels;
+        _leaderBoardsTableID = difficultyLevel.leaderBoardsTableID;
+
         RefreshStarsFilling();
     }
 
@@ -60,12 +70,21 @@ public class DifficultyLevelButton : MonoBehaviour
     public void RefreshStarsFilling()
     {
         float completedLevelProgresesPercentSum = 0;
+        float notNormalizedPointsSum = 0;
+
         foreach (var levelScriptableObj in _levelScriptableObjs)
         {
-            completedLevelProgresesPercentSum += PlayerPrefsManager.GetSavedLevelStats(levelScriptableObj);
+            levelScriptableObj.Parse();
+            completedLevelProgresesPercentSum += PlayerPrefsManager.GetNormalizedPercent(PlayerPrefsManager.GetSavedLevelStats(levelScriptableObj));
+            float savedStats = PlayerPrefsManager.GetSavedLevelStats(levelScriptableObj);
+            float pointsAmount = levelScriptableObj.LevelPointsAmount;
+            notNormalizedPointsSum += savedStats * pointsAmount;
+            levelScriptableObj.Parse();
         }
 
         float difficultyCompletePercent = completedLevelProgresesPercentSum / _levelScriptableObjs.Count;
         _starsProgresBarImage.fillAmount = difficultyCompletePercent;
+
+        _scoreText.text = SCORE_TEXT + notNormalizedPointsSum;
     }
 }
