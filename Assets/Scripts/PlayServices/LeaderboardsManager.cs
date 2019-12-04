@@ -17,7 +17,9 @@ public class LeaderboardsManager : MonoBehaviour
     {
         if (_authManager.CheckAuth()) 
         {
+            #if UNITY_ANDROID && !UNITY_EDITOR
             PlayGamesPlatform.Instance.ShowLeaderboardUI(leaderboardID);
+            #endif
         }
         else 
         {
@@ -29,7 +31,9 @@ public class LeaderboardsManager : MonoBehaviour
     {
         if (_authManager.CheckAuth()) 
         {
+            #if UNITY_ANDROID && !UNITY_EDITOR
             PlayGamesPlatform.Instance.ShowLeaderboardUI();
+            #endif
         }
         else 
         {
@@ -42,6 +46,7 @@ public class LeaderboardsManager : MonoBehaviour
         // Submit leaderboard scores, if authenticated
         if (_authManager.CheckAuth())
         {
+            #if UNITY_ANDROID && !UNITY_EDITOR
             // Note: make sure to add 'using GooglePlayGames'
             PlayGamesPlatform.Instance.ReportScore(scores,
                 tableID,
@@ -49,6 +54,7 @@ public class LeaderboardsManager : MonoBehaviour
                 {
                     Debug.Log("Leaderboard update success: " + success);
                 });
+            #endif
         }
         else
         {

@@ -50,7 +50,7 @@ public class LevelButton : MonoBehaviour
         _titleText.text = _currentLevelScriptableObj.Title;
         _gameplayPage = gameplayPage;
 
-        float savedProgress = PlayerPrefsManager.GetSavedLevelStats(levelScriptableObj);
+        float savedProgress =  PlayerPrefsManager.GetNormalizedPercent(PlayerPrefsManager.GetSavedLevelStats(levelScriptableObj));
         _starsProgresBarImage.fillAmount = savedProgress;
         _leaderboardsTableID = leaderboardsTableID;
     }

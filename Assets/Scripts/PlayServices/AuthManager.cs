@@ -11,6 +11,7 @@ public class AuthManager : MonoBehaviour
 
     public void Start()
     {
+        #if UNITY_ANDROID && !UNITY_EDITOR
         // Select the Google Play Games platform as our social platform implementation
         GooglePlayGames.PlayGamesPlatform.Activate();
 
@@ -27,6 +28,7 @@ public class AuthManager : MonoBehaviour
         PlayGamesPlatform.Activate();
 
         SignIn();
+        #endif
     }
 
     #endregion
@@ -62,7 +64,9 @@ public class AuthManager : MonoBehaviour
 
     public void SignOut()
     {
+        #if UNITY_ANDROID && !UNITY_EDITOR
         ((GooglePlayGames.PlayGamesPlatform)Social.Active).SignOut();
+        #endif
     }
 
     #endregion

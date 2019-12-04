@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 3881759898
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2efb424c0dd970a2039e2c39eb1607a9
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: b3faa0e44f7d969ba8136b649353fd85
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 727d7b84a6995a24ba04ab4f5b162044, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ab340cce3f1c29744a6de0d89c3a8067, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/WordsLibrary/Difficulties/English.asset
+Dependencies: []

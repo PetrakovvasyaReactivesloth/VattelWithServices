@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class ChooseLevelPage : Page
 {
+    #region Properties
+
+    public List<LevelScriptableObj> CurrentLevelScriptableObjs { get => _currentLevelScriptableObjs; set => _currentLevelScriptableObjs = value; }
+
+    #endregion
+    
     #region Serialized Fields
 
     [SerializeField] private LevelButton _levelButtonPrefab;
@@ -50,18 +56,18 @@ public class ChooseLevelPage : Page
     public LevelScriptableObj GetNextLevelAfterCurrent(LevelScriptableObj current)
     {
         int currentIndex =
-            _currentLevelScriptableObjs.IndexOf(_currentLevelScriptableObjs.FirstOrDefault(c => c == current));
+            CurrentLevelScriptableObjs.IndexOf(CurrentLevelScriptableObjs.FirstOrDefault(c => c == current));
 
-        LevelScriptableObj temp = (currentIndex == _currentLevelScriptableObjs.Count - 1)
+        LevelScriptableObj temp = (currentIndex == CurrentLevelScriptableObjs.Count - 1)
             ? null
-            : _currentLevelScriptableObjs[currentIndex + 1];
+            : CurrentLevelScriptableObjs[currentIndex + 1];
 
         return temp;
     }
 
     public void ShowCurrentLevelsList()
     {
-        Init(_currentLevelScriptableObjs, _leaderBoardsTableID);
+        Init(CurrentLevelScriptableObjs, _leaderBoardsTableID);
     }
 
     public void Init(List<LevelScriptableObj> levelScriptableObjs, string leaderboardTableID)
@@ -69,7 +75,7 @@ public class ChooseLevelPage : Page
         RemoveAllElements();
 
         _leaderBoardsTableID = leaderboardTableID;
-        _currentLevelScriptableObjs = levelScriptableObjs;
+        CurrentLevelScriptableObjs = levelScriptableObjs;
 
         foreach (var levelScriptableObj in levelScriptableObjs)
         {
