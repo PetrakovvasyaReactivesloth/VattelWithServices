@@ -76,7 +76,8 @@ public class SettingsPopup : Popup
             Debug.Log("Возможно после нажатия reset progress стоить отображать окошко, уверены ли вы");
 
             PlayerPrefsManager.ResetProgress();
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+
             Hide();
             _mainMenuPage.Show();
         });
