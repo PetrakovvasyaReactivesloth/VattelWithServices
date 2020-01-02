@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: English
   _difficultyLevels:
-  - title: Easy
+  - order: 1
+    title: Easy
     leaderBoardsTableID: CgkI7Kfxt7UJEAIQAg
     _levels:
     - {fileID: 11400000, guid: 5d255d410e7e6324a810de37658a4fc3, type: 2}
