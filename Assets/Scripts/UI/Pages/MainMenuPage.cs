@@ -40,7 +40,7 @@ public class MainMenuPage : Page
             Hide();
         });
 
-        AssetBundlesLoader.Instance.RegisterOnLevelsDictionaryLoadListener(OnLevelsDictionaryLoaded);
+        WWWLevelsLoader.Instance.RegisterOnLevelsDictionaryLoadListener(OnLevelsDictionaryLoaded);
     }
 
     private void OnLevelsDictionaryLoaded()

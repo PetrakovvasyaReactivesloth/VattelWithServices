@@ -96,7 +96,7 @@ public class AssetBundlesLoader : MonoBehaviour
     private Dictionary<string, uint> _bundlesVersionsDictionary = new Dictionary<string, uint>();
     private ServerType _currentServerType = ServerType.Local;
     private List<AssetBundle> _currentLoadedAssetBundles = new List<AssetBundle>();
-    private List<System.Action> _levelsDictionaryLoadedListeners = new List<Action>();
+    private List<Action> _levelsDictionaryLoadedListeners = new List<Action>();
 
     #endregion
 
@@ -489,14 +489,13 @@ public class AssetBundlesLoader : MonoBehaviour
         return platformString;
     }
 
-    public void NotifyOnLevelsDictionaryLoadListeners()
+    private void NotifyOnLevelsDictionaryLoadListeners()
     {
         foreach (var levelsDictionaryLoadedListener in _levelsDictionaryLoadedListeners)
         {
             levelsDictionaryLoadedListener?.Invoke();
         }
     }
-
 
     #endregion
 

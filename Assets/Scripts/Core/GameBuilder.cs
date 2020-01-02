@@ -24,12 +24,12 @@ public class GameBuilder : MonoBehaviour
 
     private void Awake()
     {
-        AssetBundlesLoader.Instance.RegisterOnLevelsDictionaryLoadListener(OnLevelsDictionaryLoaded);
+        WWWLevelsLoader.Instance.RegisterOnLevelsDictionaryLoadListener(OnLevelsDictionaryLoaded);
     }
 
     private void OnLevelsDictionaryLoaded()
     {
-        _languageWordsDictionary = AssetBundlesLoader.Instance.LoadedLevelsDictionary;
+        _languageWordsDictionary = WWWLevelsLoader.Instance.LoadedLevelsDictionary;
     }
 
     #endregion
