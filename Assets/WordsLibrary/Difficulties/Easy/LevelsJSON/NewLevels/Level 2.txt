@@ -1,0 +1,92 @@
+{
+  "levelName": "Level 2",
+  "levelTime": 30,
+  "levelPointsAmount": 15,
+  "words": [
+    {
+      "word": "provide",
+      "prizeCoins": 3,
+      "tip": "снабжать",
+      "synonyms": [
+        "give",
+        "deliver",
+        
+      ],
+      "antonyms": [
+        "take",
+        "borrow",
+        
+      ]
+    },
+    {
+      "word": "available",
+      "prizeCoins": 3,
+      "tip": "доступный",
+      "synonyms": [
+        "free",
+        "vacant",
+        "open",
+        
+      ],
+      "antonyms": [
+        "limited",
+        "occupied",
+        "busy",
+        
+      ]
+    },
+    {
+      "word": "regular",
+      "prizeCoins": 3,
+      "tip": "обычный",
+      "synonyms": [
+        "usual",
+        "normal",
+        "standard",
+        
+      ],
+      "antonyms": [
+        "unusual",
+        "special",
+        "uncommon",
+        
+      ]
+    },
+    {
+      "word": "important",
+      "prizeCoins": 3,
+      "tip": "важный",
+      "synonyms": [
+        "significant",
+        "meaningful",
+        "vital",
+        "serious",
+        
+      ],
+      "antonyms": [
+        "insignificant",
+        "unknown",
+        "ordinary",
+        "trivial",
+        
+      ]
+    },
+    {
+      "word": "previous",
+      "prizeCoins": 3,
+      "tip": "предыдущий",
+      "synonyms": [
+        "past",
+        "earlier",
+        "old",
+        
+      ],
+      "antonyms": [
+        "next",
+        "future",
+        "present",
+        
+      ]
+    }
+  ]
+}

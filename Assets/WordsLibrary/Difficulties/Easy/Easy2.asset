@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab340cce3f1c29744a6de0d89c3a8067, type: 3}
   m_Name: Easy2
   m_EditorClassIdentifier: 
-  _levelJSON: {fileID: 4900000, guid: 95aaa042377617443aaa43c98da9bcf1, type: 3}
-  _title: Easy2
+  _levelJSON: {fileID: 4900000, guid: 58fadee515dd0774e815b2c8506f5502, type: 3}

@@ -19,7 +19,7 @@ MonoBehaviour:
     _levels:
     - {fileID: 11400000, guid: 5d255d410e7e6324a810de37658a4fc3, type: 2}
     - {fileID: 11400000, guid: 41e4df97ee99ec549bd24b6a00d3cff4, type: 2}
-  - title: Medium
-    leaderBoardsTableID: CgkI7Kfxt7UJEAIQAQ
-    _levels:
-    - {fileID: 11400000, guid: 179aa019f889ee24d866ff73850cbb2a, type: 2}
+    - {fileID: 11400000, guid: 049ca70961652004c942d3be8607d0c1, type: 2}
+    - {fileID: 11400000, guid: caaac336b3fff3c40a1fe2870abbee4f, type: 2}
+    - {fileID: 11400000, guid: 0c925a998dd424a449c557b4bf6b9028, type: 2}
+    - {fileID: 11400000, guid: ec3949f7c73a6424080a926c36653d90, type: 2}

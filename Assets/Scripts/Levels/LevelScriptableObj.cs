@@ -75,6 +75,7 @@ public class LevelScriptableObj : ScriptableObject
     public void Parse()
     {
         Reset();
+        
         JSONNode level = JSON.Parse(LevelJson.text);
         LevelTime = (float) level["levelTime"];
         LevelPointsAmount = (int) level["levelPointsAmount"];
