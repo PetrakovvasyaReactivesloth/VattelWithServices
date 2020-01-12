@@ -8,8 +8,8 @@ public class SettingsPopup : Popup
     #region Constants
 
     private const string PERCENT_STRING = "%";
-    private const string SIGN_IN_STRING = "Sign in";
-    private const string SIGN_OUT_STRING = "Sign out";
+    private const string SIGN_IN_STRING = "SIGN IN";
+    private const string SIGN_OUT_STRING = "SIGN OUT";
 
     #endregion
 

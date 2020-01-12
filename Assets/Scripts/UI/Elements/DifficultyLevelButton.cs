@@ -6,7 +6,7 @@ public class DifficultyLevelButton : MonoBehaviour
 {
     #region Cosntants
 
-    private const string SCORE_TEXT = "Best score: ";
+    private const string SCORE_TEXT = "";
 
     #endregion
 

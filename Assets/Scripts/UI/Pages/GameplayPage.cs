@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GameplayPage : Page
 {
@@ -34,7 +36,8 @@ public class GameplayPage : Page
                 _currentPoints = 0;
             }
 
-            _levelPointsText.text = _currentPoints + "/" + _levelMaximumPoints;
+            //_levelPointsText.text = _currentPoints + "/" + _levelMaximumPoints;
+            _levelPointsText.text = _currentPoints.ToString();
         }
     }
 
@@ -43,6 +46,7 @@ public class GameplayPage : Page
     #region Serialized Field
 
     [SerializeField] private Text _mainWordText;
+    [SerializeField] private Text _levelNameText;
     [SerializeField] private Text _compareWordText;
     [SerializeField] private Button _synonymButton;
     [SerializeField] private Button _antonymButton;
@@ -51,10 +55,14 @@ public class GameplayPage : Page
     [SerializeField] private Image answerSuccessOrWrongIndicatorImage;
     [SerializeField] private Sprite _answerSuccessSprite, _answerWrongSprite;
     [SerializeField] private Text _timerText;
+    [SerializeField] private Image _timerBar;
     [SerializeField] private Text _levelPointsText;
+    [SerializeField] private Image _starsProgress;
     [SerializeField] private EndGamePopup _endGamePopup;
     [SerializeField] private ChooseLevelPage _chooseLevelPage;
     [SerializeField] private TipPopup _tipPopup;
+
+    public GameObject[] disablingObject;
 
     #endregion
 
@@ -65,11 +73,13 @@ public class GameplayPage : Page
     private bool isSynonymSecondWord;
     private int previousWordIndex;
     private float _currentTime;
+    private float _startedTime;
     private int _currentPoints;
     private int _levelMaximumPoints;
     private bool _gameEnd;
     private string _leaderboardsTableID;
 
+    private float _t;
     #endregion
 
     #region Methods
@@ -93,6 +103,21 @@ public class GameplayPage : Page
             Hide();
             _chooseLevelPage.Show();
         });
+    }
+
+    private void Update()
+    {
+        _t -= Time.unscaledDeltaTime;
+        
+        if (_timerBar.isActiveAndEnabled)
+        {
+            _timerBar.fillAmount = (float)_t / (float)_startedTime;
+        }
+
+        if (_starsProgress.isActiveAndEnabled)
+        {
+            _starsProgress.fillAmount = (float)_currentPoints/(float)_levelMaximumPoints;
+        }
     }
 
     #endregion
@@ -123,6 +148,7 @@ public class GameplayPage : Page
         SetLevelMaximumTime(_currentLevelScriptableObj.LevelTime);
         SetLevelMaximumPoints(_currentLevelScriptableObj.LevelPointsAmount);
         _leaderboardsTableID = leaderboardsTableID;
+        _levelNameText.text = _currentLevelScriptableObj.Title.ToUpper();
     }
 
     #endregion
@@ -142,28 +168,20 @@ public class GameplayPage : Page
 
     private void DisableAllElements()
     {
-        _tipButton.gameObject.SetActive(false);
-        _antonymButton.gameObject.SetActive(false);
-        _synonymButton.gameObject.SetActive(false);
-        _closeButton.gameObject.SetActive(false);
-        _timerText.gameObject.SetActive(false);
-        _levelPointsText.gameObject.SetActive(false);
-        _compareWordText.gameObject.SetActive(false);
-        _mainWordText.gameObject.SetActive(false);
+        foreach (GameObject go in disablingObject)
+        {
+            go.SetActive(false);
+        }
     }
 
     private void EnableAllElements()
     {
         if (!_gameEnd)
         {
-            _tipButton.gameObject.SetActive(true);
-            _antonymButton.gameObject.SetActive(true);
-            _synonymButton.gameObject.SetActive(true);
-            _closeButton.gameObject.SetActive(true);
-            _timerText.gameObject.SetActive(true);
-            _levelPointsText.gameObject.SetActive(true);
-            _compareWordText.gameObject.SetActive(true);
-            _mainWordText.gameObject.SetActive(true);
+            foreach (GameObject go in disablingObject)
+            {
+                go.SetActive(true);
+            }
         }
     }
 
@@ -174,8 +192,15 @@ public class GameplayPage : Page
             string minutes = Mathf.Floor(_currentTime / 60).ToString("00");
             string seconds = (_currentTime % 60).ToString("00");
 
-            _timerText.text = string.Format("{0}:{1}", minutes, seconds);
-
+            if (_currentTime/60 >= 1)
+            {
+                _timerText.text = string.Format("{0}:{1}", minutes, seconds);
+            }
+            else
+            {
+                _timerText.text = string.Format("{0}", seconds);
+            }
+            
             yield return new WaitForSeconds(ONE_SECOND);
             _currentTime -= ONE_SECOND;
         }
@@ -192,6 +217,8 @@ public class GameplayPage : Page
     private void SetLevelMaximumTime(float levelTime)
     {
         _currentTime = levelTime;
+        _startedTime = levelTime;
+        _t = levelTime;
         StartCoroutine(TimerWork());
     }
 

@@ -7,14 +7,14 @@ public class EndGamePopup : Popup
 
     private readonly string[] CONGRADULATIONS = new[]
     {
-        "Congradulation!",
+        "Congratulations!",
         "Cool. Let's try next level.",
         "Awesome!"
     };
 
     private readonly string[] LOSE_HELPERS = new[]
     {
-        "Don't worry! Try again)",
+        "Don't worry! Try again.",
         "Let's try again.",
         "Next time you will success!"
     };
@@ -29,7 +29,7 @@ public class EndGamePopup : Popup
     
     #region Serialized Fields
 
-    [SerializeField] private Image _star1Image, _star2Image, _star3Image;
+    [SerializeField] private Image _stars;
     [SerializeField] private Button _openLevelsMenuButton;
     [SerializeField] private Button _retryLevelButton;
     [SerializeField] private Button _nextLevelButton;
@@ -91,24 +91,15 @@ public class EndGamePopup : Popup
 
         if (percent >= ONE_STAR_PERCENT)
         {
-            _star1Image.color = _starActiveColor;
-            _congradText.text = CONGRADULATIONS[Random.Range(0, CONGRADULATIONS.Length)];
+            _congradText.text = CONGRADULATIONS[Random.Range(0, CONGRADULATIONS.Length)].ToUpper();
         }
         else if (percent < ONE_STAR_PERCENT)
         {
-            _congradText.text = LOSE_HELPERS[Random.Range(0, LOSE_HELPERS.Length)];
+            _congradText.text = LOSE_HELPERS[Random.Range(0, LOSE_HELPERS.Length)].ToUpper();
         }
 
-        if (percent >= TWO_STAR_PERCENT)
-        {
-            _star2Image.color = _starActiveColor;
-        }
-
-        if (percent >= THREE_STAR_PERCENT)
-        {
-            _star3Image.color = _starActiveColor;
-        }
-
+        _stars.fillAmount = percent;
+        
         if (nextLevelExits)
         {
             _nextLevelButton.gameObject.SetActive(true);
@@ -135,7 +126,7 @@ public class EndGamePopup : Popup
     {
         base.Hide();
 
-        _star1Image.color = _star2Image.color = _star3Image.color = _starDeactiveColor;
+        _stars.fillAmount = 0;
         _nextLevelButton.gameObject.SetActive(false);
     }
 

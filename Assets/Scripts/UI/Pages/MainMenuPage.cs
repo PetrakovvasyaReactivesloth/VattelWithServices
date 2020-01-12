@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenuPage : Page
@@ -14,7 +15,8 @@ public class MainMenuPage : Page
     [SerializeField] private GameObject _loadingBundlesPanelGameObject;
     [SerializeField] private LeaderboardsManager _leaderboardsManager;
     [SerializeField] private AuthManager _authManager;
-
+    [SerializeField] private GameplayPage gamePanel;
+    
     #endregion
 
     #region Methods
@@ -39,8 +41,13 @@ public class MainMenuPage : Page
             _chooseDifficultyPage.Show();
             Hide();
         });
-
+        
         WWWLevelsLoader.Instance.RegisterOnLevelsDictionaryLoadListener(OnLevelsDictionaryLoaded);
+    }
+
+    private void OnEnable()
+    {
+        gamePanel.Hide();
     }
 
     private void OnLevelsDictionaryLoaded()

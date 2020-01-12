@@ -25,7 +25,7 @@ public class TipPopup : Popup
 
     public void Init(LevelScriptableObj.Word word)
     {
-        _mainTipText.text = word.word + "\n" + word.tip;
+        _mainTipText.text = word.word.ToUpper() + "\n" + word.tip.ToUpper();
     }
 
     #endregion

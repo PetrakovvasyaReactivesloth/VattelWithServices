@@ -103,7 +103,7 @@ public class ChooseLevelPage : Page
     {
         foreach (Transform child in _levelButtonsParenTransform)
         {
-            Destroy(child.gameObject);
+            DestroyImmediate(child.gameObject);
         }
     }
 

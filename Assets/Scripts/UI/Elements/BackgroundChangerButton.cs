@@ -5,7 +5,7 @@ public class BackgroundChangerButton : MonoBehaviour
 {
     #region Private Fields
 
-    private Image _cachedImage;
+    public Image _cachedImage;
     private Button _cachedButton;
 
     #endregion
@@ -16,7 +16,7 @@ public class BackgroundChangerButton : MonoBehaviour
 
     private void Awake()
     {
-        _cachedImage = GetComponent<Image>();
+        //_cachedImage = GetComponent<Image>();
         _cachedButton = GetComponent<Button>();
 
         _cachedButton.onClick.AddListener(() =>
