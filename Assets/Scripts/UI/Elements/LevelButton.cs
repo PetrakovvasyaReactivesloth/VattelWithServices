@@ -48,6 +48,7 @@ public class LevelButton : MonoBehaviour
         _currentLevelScriptableObj = levelScriptableObj;
         _chooseLevelPage = chooseLevelPage;
         _titleText.text = _currentLevelScriptableObj.Title;
+        gameObject.name = _currentLevelScriptableObj.Title + this.ToString();
         _gameplayPage = gameplayPage;
 
         float savedProgress =  PlayerPrefsManager.GetNormalizedPercent(PlayerPrefsManager.GetSavedLevelStats(levelScriptableObj));

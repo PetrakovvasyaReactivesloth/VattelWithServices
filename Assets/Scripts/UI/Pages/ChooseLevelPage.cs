@@ -77,13 +77,18 @@ public class ChooseLevelPage : Page
         _leaderBoardsTableID = leaderboardTableID;
         CurrentLevelScriptableObjs = levelScriptableObjs;
 
+        levelScriptableObjs.Sort((x, y) => x.Title.CompareTo(y.Title));
+
         foreach (var levelScriptableObj in levelScriptableObjs)
         {
+            Debug.Log(levelScriptableObj.Title);
             var but = Instantiate(_levelButtonPrefab, _levelButtonsParenTransform);
 
             levelScriptableObj.Parse();
             but.Init(levelScriptableObj, _gameplayPage, this, leaderboardTableID);
         }
+
+
 
         if (_authManager.CheckAuth())
         {
@@ -103,8 +108,10 @@ public class ChooseLevelPage : Page
     {
         foreach (Transform child in _levelButtonsParenTransform)
         {
-            DestroyImmediate(child.gameObject);
+            Destroy(child.gameObject);
         }
+
+        Debug.Log("Осталось: " + _levelButtonsParenTransform.childCount);
     }
 
     #endregion
