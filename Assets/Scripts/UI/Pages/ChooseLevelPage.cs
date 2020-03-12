@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -78,7 +79,7 @@ public class ChooseLevelPage : Page
         CurrentLevelScriptableObjs = levelScriptableObjs;
 
         levelScriptableObjs.Sort((x, y) => x.Title.CompareTo(y.Title));
-
+        
         foreach (var levelScriptableObj in levelScriptableObjs)
         {
             Debug.Log(levelScriptableObj.Title);

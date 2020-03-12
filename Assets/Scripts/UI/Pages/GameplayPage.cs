@@ -162,6 +162,7 @@ public class GameplayPage : Page
         _tipPopup.Hide();
         _endGamePopup.Init(_currentPoints, _levelMaximumPoints, _leaderboardsTableID, _nextLevelScriptableObj != null,
             _currentLevelScriptableObj);
+        _chooseLevelPage.ShowCurrentLevelsList();
         StopAllCoroutines();
         DisableAllElements();
     }
